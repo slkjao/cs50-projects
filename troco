@@ -1,0 +1,101 @@
+import java.math.BigDecimal;
+import java.util.Locale;
+import java.util.Scanner;
+
+public class Coins {
+    public static void main(String[] args) {
+        Locale.setDefault(new Locale("en", "US"));
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("valor total:");
+        BigDecimal valTotal = BigDecimal.valueOf(sc.nextDouble());
+
+        System.out.print("valor pago:");
+        BigDecimal valPago = BigDecimal.valueOf(sc.nextDouble());
+
+        BigDecimal troco = valPago.subtract(valTotal);
+        if (troco.compareTo(BigDecimal.ZERO) < 0) {
+            System.out.println("valor invalido!");
+        } else {
+            System.out.println("++++++++++++++++++++++++");
+            System.out.println("Troco a ser devolvido: "+troco);
+            trocoProcessor(troco);
+        }
+    }
+
+    static void trocoProcessor(BigDecimal troco) {
+        int nota100 = 0, nota50 = 0, nota20 = 0, nota10 = 0, nota5 = 0, nota2 = 0, moeda100 = 0, moeda50 = 0, moeda25 = 0, moeda10 = 0, moeda5 = 0;
+        BigDecimal divisor;
+        troco = troco.multiply(new BigDecimal(100));
+        if (troco.compareTo(BigDecimal.valueOf(10000)) >= 0) {
+            divisor = new BigDecimal(10000);
+            nota100 = troco.divide(divisor).intValue();
+            troco = troco.remainder(divisor);
+        }
+        if (troco.compareTo(BigDecimal.valueOf(5000)) >= 0) {
+            divisor = new BigDecimal(5000);
+            nota50 = troco.divide(divisor).intValue();
+            troco = troco.remainder(divisor);
+        }
+        if (troco.compareTo(BigDecimal.valueOf(2000)) >= 0) {
+            divisor = new BigDecimal(2000);
+            nota20 = troco.divide(divisor).intValue();
+            troco = troco.remainder(divisor);
+        }
+        if (troco.compareTo(BigDecimal.valueOf(1000)) >= 0) {
+            divisor = new BigDecimal(1000);
+            nota10 = troco.divide(divisor).intValue();
+            troco = troco.remainder(divisor);
+        }
+        if (troco.compareTo(BigDecimal.valueOf(500)) >= 0) {
+            divisor = new BigDecimal(500);
+            nota5 = troco.divide(divisor).intValue();
+            troco = troco.remainder(divisor);
+        }
+        if (troco.compareTo(BigDecimal.valueOf(200)) >= 0) {
+            divisor = new BigDecimal(200);
+            nota2 = troco.divide(divisor).intValue();
+            troco = troco.remainder(divisor);
+        }
+        if (troco.compareTo(BigDecimal.valueOf(100)) >= 0) {
+            divisor = new BigDecimal(100);
+            moeda100 = troco.divide(divisor).intValue();
+            troco = troco.remainder(divisor);
+        }
+        if (troco.compareTo(BigDecimal.valueOf(50)) >= 0) {
+            divisor = new BigDecimal(50);
+            moeda50 = troco.divide(divisor).intValue();
+            troco = troco.remainder(divisor);
+        }
+        if (troco.compareTo(BigDecimal.valueOf(25)) >= 0) {
+            divisor = new BigDecimal(25);
+            moeda25 = troco.divide(divisor).intValue();
+            troco = troco.remainder(divisor);
+        }
+        if (troco.compareTo(BigDecimal.valueOf(10)) >= 0) {
+            divisor = new BigDecimal(10);
+            moeda10 = troco.divide(divisor).intValue();
+            troco = troco.remainder(divisor);
+        }
+        if (troco.compareTo(BigDecimal.valueOf(5)) >= 0) {
+            divisor = new BigDecimal(5);
+            moeda5 = troco.divide(divisor).intValue();
+            troco = troco.remainder(divisor);
+        }
+        System.out.println("=============== NOTAS =============");
+        System.out.println("Nota de 100: "+ nota100);
+        System.out.println("Nota de 50: "+ nota50);
+        System.out.println("Nota de 20: "+ nota20);
+        System.out.println("Nota de 10: "+ nota10);
+        System.out.println("Nota de 5: "+ nota5);
+        System.out.println("Nota de 2: "+ nota2);
+        System.out.println("=============== MOEDAS =============");
+        System.out.println("Moeda de 1 real: "+ moeda100);
+        System.out.println("Moeda de 50: "+ moeda50);
+        System.out.println("Moeda de 25: "+ moeda25);
+        System.out.println("Moeda de 10: "+ moeda10);
+        System.out.println("Moeda de 5: "+ moeda5);
+
+        System.out.println("troco restante: "+troco);
+    }
+}
